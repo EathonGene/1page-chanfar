@@ -34,39 +34,71 @@
         html { scroll-behavior: smooth; }
         body { font-family: 'Noto Sans TC', sans-serif; color: #333; line-height: 1.8; overflow-x: hidden; }
 
-        /* 導覽列 Logo 設定 */
-        .navbar { background: rgba(255, 255, 255, 0.98); box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 10px 0; }
-        .navbar-brand { font-weight: 700; color: var(--primary-blue) !important; font-size: 1.4rem; display: flex; align-items: center; }
+        /* --- 修正後的導覽列設定 --- */
+        .navbar { 
+            background: rgba(255, 255, 255, 0.98); 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+            padding: 10px 0; 
+        }
+        
+        /* 讓容器支援換行，並在換行時置中 */
+        .navbar > .container {
+            display: flex;
+            flex-wrap: wrap; /* 重要：空間不足時自動換行 */
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand { 
+            font-weight: 700; 
+            color: var(--primary-blue) !important; 
+            font-size: 1.4rem; 
+            display: flex; 
+            align-items: center; 
+            flex-shrink: 0; /* 防止 Logo 被壓縮 */
+        }
         .navbar-brand img { height: 40px; margin-right: 12px; border-radius: 4px; }
+        
+        /* 導覽選單在小螢幕換行時的寬度與間距調整 */
+        .navbar-collapse {
+            flex-basis: 100%; /* 換行時佔滿全寬 */
+            flex-grow: 1;
+        }
+
         .nav-link { color: #333 !important; font-weight: 500; margin: 0 10px; transition: 0.3s; }
         .nav-link:hover { color: var(--primary-blue) !important; }
 
-        /* 首屏 Hero */
+        /* 手機版小調整：當選單展開時增加一點上間距 */
+        @media (max-width: 991.98px) {
+            .navbar-nav {
+                padding-top: 15px;
+                text-align: center; /* 選單置中更美觀 */
+            }
+            .nav-item {
+                padding: 5px 0;
+            }
+        }
+
+        /* --- 其他原始樣式 --- */
         .hero {
             background: linear-gradient(rgba(0, 40, 80, 0.8), rgba(0, 40, 80, 0.8)), 
                         url('https://eathongene.github.io/1page-chanfar/bckp.jpg') center/cover;
-            height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; color: white;
-            margin-top: 60px;
+            min-height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; color: white;
+            padding-top: 100px; /* 增加頂部間距防止被固定選單遮擋 */
         }
         .hero h1 { font-size: 3.2rem; font-weight: 700; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        @media (max-width: 768px) { .hero h1 { font-size: 2.2rem; } }
 
-        /* 通用設定 */
         section { padding: 90px 0; }
         .section-title { text-align: center; margin-bottom: 50px; font-weight: 700; color: var(--primary-blue); }
         .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--accent-gold); margin: 15px auto; }
 
-        /* 圖片展示區塊 */
         .intro-gallery img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            transition: 0.3s;
+            width: 100%; height: 250px; object-fit: cover; border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1); transition: 0.3s;
         }
         .intro-gallery img:hover { transform: scale(1.03); }
 
-        /* 產品卡片 */
         .product-card {
             background: white; border-radius: 12px; overflow: hidden; margin-bottom: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.08); transition: 0.3s; height: 100%;
@@ -78,7 +110,6 @@
         .product-info { padding: 25px; }
         .product-info i { font-size: 1.5rem; color: var(--accent-gold); margin-bottom: 10px; display: block; }
 
-        /* 動畫 */
         .img-box { border-radius: 15px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
         .img-box img { width: 100%; height: auto; display: block; }
         .reveal { opacity: 0; transition: all 1s ease-out; }
@@ -87,7 +118,6 @@
         .reveal-bottom { transform: translateY(40px); }
         .reveal.active { opacity: 1; transform: translateX(0) translateY(0); }
 
-        /* 聯絡資訊 */
         .contact-section { background: #001a33; color: white; padding: 80px 0; }
         .contact-item { margin-bottom: 18px; font-size: 1.1rem; display: flex; align-items: flex-start; }
         .contact-item i { color: var(--accent-gold); margin-right: 15px; font-size: 1.3rem; margin-top: 5px; }
@@ -100,6 +130,7 @@
 <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TF3FDGX6"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">
@@ -247,7 +278,7 @@
                 </div>
                 <div class="col-lg-7 reveal reveal-right">
                     <div class="map-box shadow">
-                        <iframe width="100%" height="100%" frameborder="0" scrolling="no" src="https://maps.google.com/maps?q=彰化縣福興鄉三和村南興街93-36號&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
+                        <iframe width="100%" height="100%" frameborder="0" scrolling="no" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3645.72750831683!2d120.4468603!3d23.970034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34694901f6004509%3A0xa648e58986851b4b!2zNTA25b2w5YyW57ij56aP6IiI6YSJ5Y2X6IiI6KGXOTMtMzbomZ8!5e0!3m2!1szh-TW!2stw!4v1690000000000"></iframe>
                     </div>
                 </div>
             </div>
