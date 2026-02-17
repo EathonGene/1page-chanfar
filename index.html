@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>強發金屬有限公司 | CHAN FAR - 皮帶輪與精密加工專家</title>
+    
+    <link rel="icon" href="https://lh3.googleusercontent.com/sitesv/APaQ0SSwZuRrgz49CfnW55pwj1SzDcE8cE_YmQe4h4TATQj2yg9Qy5nRg_pMSWI0Xzyo6cbthv-_LMNbxn40-XhRIyQVSfB8XkYHP6BZiS1-0lD7ggis_ppjUa1fufHLRW2-QdNWD9APfZFa5OzEdp9Sdco-8YBnvNAhVAkv8D6TSAsSABEQDZSr_REAq14=w16383" type="image/x-icon">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-blue: #004080;
+            --accent-gold: #c5a059;
+            --light-bg: #f4f7f9;
+        }
+
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Noto Sans TC', sans-serif; color: #333; line-height: 1.8; overflow-x: hidden; }
+
+        /* 導覽列 Logo 設定 */
+        .navbar { background: rgba(255, 255, 255, 0.98); box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 10px 0; }
+        .navbar-brand { font-weight: 700; color: var(--primary-blue) !important; font-size: 1.4rem; display: flex; align-items: center; }
+        .navbar-brand img { height: 40px; margin-right: 12px; border-radius: 4px; }
+        .nav-link { color: #333 !important; font-weight: 500; margin: 0 10px; transition: 0.3s; }
+        .nav-link:hover { color: var(--primary-blue) !important; }
+
+        /* 首屏 Hero */
+        .hero {
+            background: linear-gradient(rgba(0, 40, 80, 0.8), rgba(0, 40, 80, 0.8)), 
+                        url('https://lh3.googleusercontent.com/sitesv/APaQ0SRRxvHUlFXZteh1eYw0VswT1ODPOJ67ZD9UWHSJRWZxjCKgq6hQ8p-bxyL2EV9E2TbrDVD6ObRWtOKxcWGP-K4_riyPnPmtM0idWZblOSgyPnOuNaUg6516aGiKmkPcrRk1F96K5b8YgcgC14WFnYDWyQcCON7L1C1uYgC0Ql0cUNdGvY152_X8seE=w16383') center/cover;
+            height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; color: white;
+            margin-top: 60px;
+        }
+        .hero h1 { font-size: 3.2rem; font-weight: 700; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+
+        /* 通用設定 */
+        section { padding: 90px 0; }
+        .section-title { text-align: center; margin-bottom: 50px; font-weight: 700; color: var(--primary-blue); }
+        .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--accent-gold); margin: 15px auto; }
+
+        /* 新增圖片展示區塊 */
+        .intro-gallery img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+        .intro-gallery img:hover {
+            transform: scale(1.03);
+        }
+
+        /* 產品卡片 */
+        .product-card {
+            background: white; border-radius: 12px; overflow: hidden; margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08); transition: 0.3s; height: 100%;
+        }
+        .product-card:hover { transform: translateY(-10px); }
+        .product-img-box { height: 220px; overflow: hidden; }
+        .product-img-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .product-card:hover .product-img-box img { transform: scale(1.1); }
+        .product-info { padding: 25px; }
+        .product-info i { font-size: 1.5rem; color: var(--accent-gold); margin-bottom: 10px; display: block; }
+
+        /* 圖片動畫 */
+        .img-box { border-radius: 15px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
+        .img-box img { width: 100%; height: auto; display: block; }
+
+        .reveal { opacity: 0; transition: all 1s ease-out; }
+        .reveal-left { transform: translateX(-80px); }
+        .reveal-right { transform: translateX(80px); }
+        .reveal-bottom { transform: translateY(40px); }
+        .reveal.active { opacity: 1; transform: translateX(0) translateY(0); }
+
+        /* 聯絡資訊 */
+        .contact-section { background: #001a33; color: white; padding: 80px 0; }
+        .contact-item { margin-bottom: 18px; font-size: 1.1rem; display: flex; align-items: flex-start; }
+        .contact-item i { color: var(--accent-gold); margin-right: 15px; font-size: 1.3rem; margin-top: 5px; }
+        .contact-item a { color: white; text-decoration: none; }
+        
+        .map-box { border-radius: 15px; overflow: hidden; height: 350px; }
+
+        footer { background: #000d1a; color: #888; padding: 25px 0; text-align: center; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.1); }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SSwZuRrgz49CfnW55pwj1SzDcE8cE_YmQe4h4TATQj2yg9Qy5nRg_pMSWI0Xzyo6cbthv-_LMNbxn40-XhRIyQVSfB8XkYHP6BZiS1-0lD7ggis_ppjUa1fufHLRW2-QdNWD9APfZFa5OzEdp9Sdco-8YBnvNAhVAkv8D6TSAsSABEQDZSr_REAq14=w16383" alt="Logo">
+                強發金屬有限公司
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">首頁</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">公司簡介</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#products">產品項目</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#capability">加工能力</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">聯絡方式</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container reveal reveal-bottom active">
+            <h1 class="display-4 fw-bold">皮帶輪專業製造 ‧ 精密 CNC 加工</h1>
+            <p class="lead mt-3">強發金屬有限公司 — 逾 40 年工藝技術，成就產業穩定傳動</p>
+            <a href="#contact" class="btn btn-warning btn-lg mt-4 fw-bold px-5 shadow">聯繫詢價</a>
+        </div>
+    </header>
+
+    <section class="pb-0">
+        <div class="container intro-gallery">
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4 reveal reveal-bottom">
+                    <img src="https://lh3.googleusercontent.com/sitesv/APaQ0ST4l3MG5yiIcBFpBqs1y0xQ4e-h5i51GU4NZKjQrUhuEOyrVuqF0esaEivdGVSo7C3srIG3caW0X5ri-gB7lPXS34HM-2oZzL28nlWPv0-yzveYdv5WDFEs5R6jTzQgG7j7nklWhFbYGZd2pPJ9eSNW7mZK566P7uQMkcRAk1T78MlRvSYAWoo-mts=w1280" alt="精選產品 1">
+                </div>
+                <div class="col-md-4 reveal reveal-bottom" style="transition-delay: 0.1s;">
+                    <img src="https://lh3.googleusercontent.com/sitesv/APaQ0STvmQm6T65NZnBC8yl4pJ395oddBX9wL2J6lbhPiP_TJapzs-za1DN5BcEEhby1mcwQ1CvgHatGNcagbhvsOTa6wL5zxfySavCAVRUS0U-zWOWVITle78VbZOsiiSPtUhES4ogvXVP46Qjrunsq4Fg1Q4dWDZ___pBlwcMjutljpg8DDNP3Gt423mA=w1280" alt="精選產品 2">
+                </div>
+                <div class="col-md-4 reveal reveal-bottom" style="transition-delay: 0.2s;">
+                    <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SQdWgPAWz3bNM7Q6KA4x9GV9mpho9LPtJ8WYwvw9Wi8ppafI-qrwMVrdwF7gjZqsMVDXVmpx5y5vcsWjfFpudVb61TKWAeGvIQAahjzemsoSs2AkRD4lpE3apLNwdSFZgIg8es7FwvdUBalfmVh9bDhENGoJZgfAxDuUD0i392TRPUzQqV2pfvqYBk=w1280" alt="精選產品 3">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 reveal reveal-left">
+                    <h2 class="fw-bold mb-4">關於強發金屬</h2>
+                    <p><strong>強發金屬有限公司</strong>成立於 1979 年，擁有超過四十年的金屬零件製造與皮帶輪生產經驗。我們具備從研發、素材鑄造到高精度加工的一站式服務能力。</p>
+                    <p>憑藉著深厚的機械加工底蘊與對品質的堅持，我們服務於空壓機、農業機械、紡織及食品機電等多元產業，是您最值得信賴的長期策略夥伴。</p>
+                </div>
+                <div class="col-lg-6 reveal reveal-right">
+                    <div class="img-box">
+                        <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SSP39lYSb7H1drIqfG3KtaD1BK4_uchZKgVvw-ZjEUWSH4wPXv6d9jhLGnlu3KwbTaijubAlNVy9TJcT_m2yIlOJa_ySYL-X8vPUylGlbCi5oq1VXhWQSh8glBOppJ_C8SDXVFIs2GJgi_w4W1tOsC8G0M6jgcWSNDtPblCYNSSvS6j9XrAkzvyWmepylQhJdXcBBoWVyE0FPE_B0n-6BhblDzfvQ_VzfwA=w1280" alt="強發金屬工廠展示">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="products" style="background-color: var(--light-bg);">
+        <div class="container">
+            <h2 class="section-title">核心產品系列</h2>
+            <div class="row g-4">
+                <div class="col-md-4 reveal reveal-bottom">
+                    <div class="product-card">
+                        <div class="product-img-box">
+                            <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SR9WEPIwjaER0nwZRPEOxcCX_Is-pceN26snoJqKL08-cbum5AT8k82ALT-WWGaxv8B6doERxUx6b7AbMkxlJpRKLxQITjQxNsR5naOc0QE6PTnYn0ZvA_fbJudKW6byS_R5ilyEQfxRnsAnLqRPJ8X8ZdpPvDCf0Lf6A-VU6v_3_7pQYwlIcI3cNuhFb86p37IZoeFrHZD-5UlqvkLYGv9rHZGM3xXLKtwgl8=w1280" alt="專業皮帶輪">
+                        </div>
+                        <div class="product-info">
+                            <i class="bi bi-gear-wide"></i>
+                            <h4 class="fw-bold">專業皮帶輪 (Pulley)</h4>
+                            <p>生產三角皮帶輪、5V/8V 高功率皮帶輪、多溝輪、鋼索輪及平面輪。支持 ODM 特規開發。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 reveal reveal-bottom" style="transition-delay: 0.1s;">
+                    <div class="product-card">
+                        <div class="product-img-box">
+                            <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SSUN68scp-5knjGCpxHQ_w0v7WUNWbYzW21ysqWRV58iVWYLw5EqmBYRw3ioXfrtJm7rPe9QxOt7t5GJsApq_WComcBXTl7nMy3eqCviHRdsLm8VbOQQHqUbr2ygTMjsofPQsmGNF0jR47GKVWWl0gDYh17tJYY09gBYIs-vv5ckRVCoJovdgiVSA2kdiL7hMMt8wJIBwsV1zbJIo9xgRi3xK1rlEB2u_dWz8M=w1280" alt="機械機件開發">
+                        </div>
+                        <div class="product-info">
+                            <i class="bi bi-hammer"></i>
+                            <h4 class="fw-bold">機械機件開發</h4>
+                            <p>專精空壓機零件、軸承座、食品機械組件及農業傳動零件。提供鑄鐵、不鏽鋼等多樣材質。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 reveal reveal-bottom" style="transition-delay: 0.2s;">
+                    <div class="product-card">
+                        <div class="product-img-box">
+                            <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SRkQeH7fOaVOFo8kzBBSbdjQxSp1uzgnmC5N5ZkvocYteJSYw5HiUxdGDzRs1jhYAmU6PgqVizGu0J2UCGukQ2A4fHcSuvfJinNHZXMsrvx8UXI7BNsgo8_ZD0peNyhr64eJAn1yQV4JCjUBaJh39cSqc13xH1GLBALBnvVw9p4JEajHlufLVMU8M9PdRcnqjy-s1S0xmpYyyOoYfzYqh8fFF9rJKNjL42evRU=w1280" alt="OEM/ODM 服務">
+                        </div>
+                        <div class="product-info">
+                            <i class="bi bi-vector-pen"></i>
+                            <h4 class="fw-bold">OEM / ODM 服務</h4>
+                            <p>從模具設計、素材鑄/鍛造，到最終成品加工與組立，提供客戶垂直整合的客製化製造服務。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="capability">
+        <div class="container">
+            <h2 class="section-title">技術與加工能力</h2>
+            <div class="row align-items-center flex-row-reverse">
+                <div class="col-lg-6 reveal reveal-right">
+                    <h3 class="fw-bold mb-4">精密設備與技術優勢</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i><strong>CNC 精密車銑加工：</strong> 採用高精度機台，確保尺寸公差精密且品質穩定。</li>
+                        <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i><strong>動平衡校正服務：</strong> 確保高速旋轉零件平衡度，減少震動並延長機械壽命。</li>
+                        <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i><strong>專業焊接技術：</strong> 提供 CO2 焊接、氬焊 (TIG)，適用於沖鍛件與管件接合。</li>
+                        <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i><strong>豐富加工經驗：</strong> 具備處理多樣材質如球墨鑄鐵、鋁、銅及不鏽鋼。</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 reveal reveal-left">
+                    <div class="img-box">
+                        <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SQknWiXRKYc9k9OCukffaHGpy6XNH6_zhXr3N_hUZ1chfz8AncKsl6XxCgLSiVLQufI2J42y032QTfedUCwn0G3N7y4v9DvFVF34xNZVhSSWBp4cicQchiD76XrsT2Z8MZ_iEQ1Sfnho-CyCGnVVzurcHUzCxbxaBhrgO0mMDoIJ0thUtCzjQ5joCCrRzyO7bsVkFOk7DAmOpOXnaXDKvFbZGyOqy6cdZ0PFfY=w1280" alt="CNC精密加工現場">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="text-white text-center mb-5 fw-bold">聯繫我們</h2>
+            <div class="row g-5">
+                <div class="col-lg-5 reveal reveal-left">
+                    <h4 class="mb-4 text-white">強發金屬有限公司</h4>
+                    <div class="contact-item">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <span>506 台灣彰化縣福興鄉三和村南興街 93-36 號</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bi bi-telephone-fill"></i>
+                        <span>電話：<a href="tel:047701699">(04) 770-1699</a></span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bi bi-printer-fill"></i>
+                        <span>傳真：(04) 770-1411</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bi bi-envelope-fill"></i>
+                        <span>Email：<a href="mailto:sales@chan-far.com">sales@chan-far.com</a></span>
+                    </div>
+                    <div class="mt-4">
+                        <a href="mailto:sales@chan-far.com" class="btn btn-warning fw-bold px-4 py-2 shadow">立即詢價</a>
+                    </div>
+                </div>
+                <div class="col-lg-7 reveal reveal-right">
+                    <div class="map-box shadow">
+                        <iframe 
+                            width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" 
+                            src="https://maps.google.com/maps?q=彰化縣福興鄉三和村南興街93-36號&hl=zh-TW&z=16&output=embed">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p class="mb-0">© <span id="current-year"></span> 強發金屬有限公司 Chan Far Metal Co., Ltd. 版權所有</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // 自動更新年份
+        document.getElementById("current-year").textContent = new Date().getFullYear();
+
+        // 頁面捲動飛入動畫
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 120;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        window.onload = reveal;
+
+        // 手機版選單自動收合
+        const navLinks = document.querySelectorAll('.nav-link');
+        const menuToggle = document.getElementById('navbarNav');
+        const bsCollapse = new bootstrap.Collapse(menuToggle, {toggle:false});
+        navLinks.forEach((l) => {
+            l.addEventListener('click', () => { 
+                if(window.innerWidth < 992) { bsCollapse.hide(); }
+            });
+        });
+    </script>
+</body>
+</html>
