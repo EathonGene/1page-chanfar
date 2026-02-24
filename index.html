@@ -35,27 +35,79 @@
         html { scroll-behavior: smooth; }
         body { font-family: 'Noto Sans TC', sans-serif; color: #333; line-height: 1.8; overflow-x: hidden; width: 100%; }
 
-        /* --- 導覽列優化 --- */
-        .navbar { background: rgba(255, 255, 255, 0.98); box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 10px 0; }
-        .navbar > .container { display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; }
-        .navbar-brand { font-weight: 700; color: var(--primary-blue) !important; font-size: 1.2rem; display: flex; align-items: center; margin-right: 0; max-width: 75%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .navbar-brand img { height: 35px; margin-right: 8px; border-radius: 4px; flex-shrink: 0; }
-        .navbar-toggler { flex-shrink: 0; padding: 4px 8px; margin-left: 5px; }
+        /* --- 導覽列優化：解決手機遮蔽問題 --- */
+        .navbar { 
+            background: rgba(255, 255, 255, 0.98); 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+            padding: 10px 0; 
+        }
+
+        .navbar > .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: nowrap; /* 確保 Logo 與按鈕在同一列 */
+        }
+
+        .navbar-brand { 
+            font-weight: 700; 
+            color: var(--primary-blue) !important; 
+            font-size: 1.2rem; /* 預設縮小一點點 */
+            display: flex; 
+            align-items: center; 
+            margin-right: 0;
+            max-width: 75%; /* 重要：限制標題寬度，預留空間給右側按鈕 */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis; /* 文字過長時顯示 ... */
+        }
+
+        .navbar-brand img { 
+            height: 35px; 
+            margin-right: 8px; 
+            border-radius: 4px; 
+            flex-shrink: 0;
+        }
+
+        .navbar-toggler {
+            flex-shrink: 0; /* 禁止按鈕被擠壓 */
+            padding: 4px 8px;
+            margin-left: 5px;
+        }
+
+        /* 電腦版選單間距 */
         .nav-link { color: #333 !important; font-weight: 500; margin: 0 10px; transition: 0.3s; }
         .nav-link:hover { color: var(--primary-blue) !important; }
 
+        /* 行動裝置展開後的選單樣式 */
         @media (max-width: 991.98px) {
-            .navbar > .container { flex-wrap: wrap; }
-            .navbar-collapse { flex-basis: 100%; margin-top: 10px; }
-            .navbar-nav { text-align: center; padding: 15px 0; border-top: 1px solid #f0f0f0; }
+            .navbar > .container {
+                flex-wrap: wrap; /* 展開後允許內容換行到下一列 */
+            }
+            .navbar-collapse {
+                flex-basis: 100%; /* 選單展開時佔滿寬度 */
+                margin-top: 10px;
+            }
+            .navbar-nav {
+                text-align: center;
+                padding: 15px 0;
+                border-top: 1px solid #f0f0f0;
+            }
+            .nav-item { padding: 5px 0; }
         }
 
-        /* --- 英雄區 --- */
+        /* 極小螢幕優化 (如舊款 iPhone) */
+        @media (max-width: 360px) {
+            .navbar-brand { font-size: 1.05rem; }
+            .navbar-brand img { height: 30px; }
+        }
+
+        /* --- 其他區塊樣式 --- */
         .hero {
             background: linear-gradient(rgba(0, 40, 80, 0.8), rgba(0, 40, 80, 0.8)), 
                         url('https://eathongene.github.io/1page-chanfar/bckp.jpg') center/cover;
             min-height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; color: white;
-            padding: 100px 15px 60px 15px;
+            padding: 100px 15px 60px 15px; /* 增加頂部間距防止被導覽列遮擋 */
         }
         .hero h1 { font-size: 3.2rem; font-weight: 700; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
         @media (max-width: 768px) { .hero h1 { font-size: 2.2rem; } }
@@ -64,18 +116,20 @@
         .section-title { text-align: center; margin-bottom: 50px; font-weight: 700; color: var(--primary-blue); }
         .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--accent-gold); margin: 15px auto; }
 
-        /* --- 最新消息摺疊樣式 --- */
-        .news-date { font-weight: 700; color: var(--accent-gold); margin-right: 15px; font-family: monospace; }
-        .accordion-item { border: none; margin-bottom: 15px; border-radius: 12px !important; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        .accordion-button:not(.collapsed) { background-color: var(--light-bg); color: var(--primary-blue); font-weight: 700; }
-
-        .intro-gallery img { width: 100%; height: 250px; object-fit: cover; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); transition: 0.3s; }
+        .intro-gallery img {
+            width: 100%; height: 250px; object-fit: cover; border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1); transition: 0.3s;
+        }
         .intro-gallery img:hover { transform: scale(1.03); }
 
-        .product-card { background: white; border-radius: 12px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); transition: 0.3s; height: 100%; }
+        .product-card {
+            background: white; border-radius: 12px; overflow: hidden; margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08); transition: 0.3s; height: 100%;
+        }
         .product-card:hover { transform: translateY(-10px); }
         .product-img-box { height: 220px; overflow: hidden; }
         .product-img-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .product-card:hover .product-img-box img { transform: scale(1.1); }
         .product-info { padding: 25px; }
         .product-info i { font-size: 1.5rem; color: var(--accent-gold); margin-bottom: 10px; display: block; }
 
@@ -97,7 +151,8 @@
     </style>
 </head>
 <body>
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TF3FDGX6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TF3FDGX6"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
@@ -114,7 +169,6 @@
                     <li class="nav-item"><a class="nav-link" href="#about">公司簡介</a></li>
                     <li class="nav-item"><a class="nav-link" href="#products">產品項目</a></li>
                     <li class="nav-item"><a class="nav-link" href="#capability">加工能力</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#news">最新消息</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">聯絡方式</a></li>
                 </ul>
             </div>
@@ -232,22 +286,6 @@
         </div>
     </section>
 
-    <section id="news" style="background-color: var(--light-bg);">
-        <div class="container">
-            <h2 class="section-title">最新消息</h2>
-            <div class="row justify-content-center">
-                <div class="col-lg-9">
-                    <div class="accordion shadow-sm" id="newsAccordion">
-                        <div class="text-center p-5" id="news-loading">
-                            <div class="spinner-border text-primary" role="status"></div>
-                            <p class="mt-2">消息讀取中...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section id="contact" class="contact-section">
         <div class="container">
             <h2 class="text-white text-center mb-5 fw-bold">聯繫強發金屬</h2>
@@ -261,7 +299,7 @@
                 </div>
                 <div class="col-lg-7 reveal reveal-right">
                     <div class="map-box shadow">
-                        <iframe width="100%" height="100%" frameborder="0" scrolling="no" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3646.6190740924975!2d120.4431718!3d23.9739433!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346949f57d422329%3A0xc3f8e58f273574d7!2zNTA25b2w5YyW57ij56aP6IiI6YSJ5Y2X6IiI6KGXOTMtMzbomZ8!5e0!3m2!1szh-TW!2stw!4v1716450000000!5m2!1szh-TW!2stw"></iframe>
+                        <iframe width="100%" height="100%" frameborder="0" scrolling="no" src="https://maps.google.com/maps?q=彰化縣福興鄉三和村南興街93-36號&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
                     </div>
                 </div>
             </div>
@@ -279,7 +317,6 @@
     <script>
         document.getElementById("current-year").textContent = new Date().getFullYear();
         
-        // 捲動揭示動畫
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
@@ -291,48 +328,9 @@
             }
         }
         window.addEventListener("scroll", reveal);
+        window.onload = reveal;
 
-        // 動態抓取最新消息 (Decap CMS / 靜態 JSON)
-        async function fetchNews() {
-            const accordion = document.getElementById('newsAccordion');
-            try {
-                // 加入隨機參數防止快取
-                const response = await fetch(`./news.json?t=${new Date().getTime()}`);
-                const rawData = await response.json();
-                
-                // 相容 Decap CMS 的物件格式與純陣列格式
-                const newsData = Array.isArray(rawData) ? rawData : (rawData.news || []);
-                
-                document.getElementById('news-loading').style.display = 'none';
-                accordion.innerHTML = ''; 
-
-                if (newsData.length === 0) {
-                    accordion.innerHTML = '<p class="text-center">目前尚無最新消息</p>';
-                    return;
-                }
-
-                newsData.forEach((item, index) => {
-                    const html = `
-                        <div class="accordion-item reveal reveal-bottom active">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#news${index}">
-                                    <span class="news-date">${item.date || ''}</span> ${item.title || ''}
-                                </button>
-                            </h2>
-                            <div id="news${index}" class="accordion-collapse collapse" data-bs-parent="#newsAccordion">
-                                <div class="accordion-body">
-                                    ${item.content || ''}
-                                </div>
-                            </div>
-                        </div>`;
-                    accordion.insertAdjacentHTML('beforeend', html);
-                });
-            } catch (error) {
-                document.getElementById('news-loading').innerHTML = '<p class="text-danger">暫時無法讀取消息</p>';
-            }
-        }
-
-        // 手機版導覽列點擊自動關閉
+        // 點擊選單項目後自動關閉選單 (手機版)
         const navLinks = document.querySelectorAll('.nav-link');
         const menuToggle = document.getElementById('navbarNav');
         const bsCollapse = new bootstrap.Collapse(menuToggle, {toggle:false});
@@ -343,11 +341,6 @@
                 } 
             });
         });
-
-        window.onload = () => {
-            reveal();
-            fetchNews();
-        };
     </script>
 </body>
 </html>
