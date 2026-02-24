@@ -1,28 +1,7 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: eathongene/1page-chanfar # 您的路徑
   branch: main
-  # 非常重要：強制指定 Identity 服務的原始網域
-  site_domain: radiant-swan-9d56af.netlify.app
 
-# 您的官方自定義網址
-site_url: https://1page.chan-far.com
-
-media_folder: "images"
-public_folder: "/images"
-
-collections:
-  - name: "content"
-    label: "網站內容"
-    delete: false
-    files:
-      - label: "最新消息清單"
-        name: "news_list"
-        file: "news.json"
-        fields:
-          - label: "最新消息"
-            name: "news"
-            widget: "list"
-            fields:
-              - { label: "日期", name: "date", widget: "datetime", format: "YYYY-MM-DD", timeFormat: false }
-              - { label: "標題", name: "title", widget: "string" }
-              - { label: "內容", name: "content", widget: "markdown" }
+# 如果您是透過 Cloudflare 登入，不需要額外的 Identity 配置
+# 但您需要在 GitHub 上建立一個 OAuth App 取得 Token (稍後說明)
