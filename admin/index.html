@@ -7,11 +7,27 @@
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
-    if (window.netlifyIdentity) {
-      window.localStorage.setItem("netlifySiteURL", "https://radiant-swan-9d56af.netlify.app");
-    }
+    // --- 強制修正自定義網域 Identity 錯誤 ---
+    // 這裡定義您的原始 Netlify 網址
+    const netlifySiteURL = "https://radiant-swan-9d56af.netlify.app";
+
+    // 儲存到 localStorage 供 CMS 讀取
+    window.localStorage.setItem("netlifySiteURL", netlifySiteURL);
+
+    // 監聽 Identity 初始化，確保它連結到正確的伺服器
+    window.netlifyIdentity.on("init", () => {
+      if (!window.localStorage.getItem("netlifySiteURL")) {
+        window.localStorage.setItem("netlifySiteURL", netlifySiteURL);
+      }
+    });
+
+    // 登入後導向
+    window.netlifyIdentity.on("login", () => {
+      document.location.href = "/admin/";
+    });
   </script>
+
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>
