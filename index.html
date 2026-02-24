@@ -20,11 +20,10 @@
     <meta property="og:type" content="website">
 
     <link href="./icon.ico" rel="shortcut icon" type="image/ico">
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
     <style>
         :root {
@@ -36,52 +35,65 @@
         html { scroll-behavior: smooth; }
         body { font-family: 'Noto Sans TC', sans-serif; color: #333; line-height: 1.8; overflow-x: hidden; width: 100%; }
 
-        /* 導覽列 */
+        /* --- 導覽列優化 --- */
         .navbar { background: rgba(255, 255, 255, 0.98); box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 10px 0; }
-        .navbar-brand { font-weight: 700; color: var(--primary-blue) !important; display: flex; align-items: center; }
-        .navbar-brand img { height: 35px; margin-right: 8px; border-radius: 4px; }
+        .navbar > .container { display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; }
+        .navbar-brand { font-weight: 700; color: var(--primary-blue) !important; font-size: 1.2rem; display: flex; align-items: center; margin-right: 0; max-width: 75%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .navbar-brand img { height: 35px; margin-right: 8px; border-radius: 4px; flex-shrink: 0; }
+        .navbar-toggler { flex-shrink: 0; padding: 4px 8px; margin-left: 5px; }
         .nav-link { color: #333 !important; font-weight: 500; margin: 0 10px; transition: 0.3s; }
         .nav-link:hover { color: var(--primary-blue) !important; }
 
-        /* 英雄區 */
+        @media (max-width: 991.98px) {
+            .navbar > .container { flex-wrap: wrap; }
+            .navbar-collapse { flex-basis: 100%; margin-top: 10px; }
+            .navbar-nav { text-align: center; padding: 15px 0; border-top: 1px solid #f0f0f0; }
+        }
+
+        /* --- 英雄區 --- */
         .hero {
             background: linear-gradient(rgba(0, 40, 80, 0.8), rgba(0, 40, 80, 0.8)), 
                         url('https://eathongene.github.io/1page-chanfar/bckp.jpg') center/cover;
-            min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; color: white;
+            min-height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; color: white;
             padding: 100px 15px 60px 15px;
         }
         .hero h1 { font-size: 3.2rem; font-weight: 700; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        @media (max-width: 768px) { .hero h1 { font-size: 2.2rem; } }
 
-        /* 通用區塊樣式 */
         section { padding: 80px 0; }
         .section-title { text-align: center; margin-bottom: 50px; font-weight: 700; color: var(--primary-blue); }
         .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--accent-gold); margin: 15px auto; }
 
-        /* 產品卡片 */
-        .product-card { background: white; border-radius: 12px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); transition: 0.3s; height: 100%; }
-        .product-img-box { height: 220px; overflow: hidden; }
-        .product-img-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .product-card:hover .product-img-box img { transform: scale(1.1); }
-        .product-info { padding: 25px; }
-
-        /* 最新消息摺疊樣式 */
+        /* --- 最新消息摺疊樣式 --- */
         .news-date { font-weight: 700; color: var(--accent-gold); margin-right: 15px; font-family: monospace; }
         .accordion-item { border: none; margin-bottom: 15px; border-radius: 12px !important; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
         .accordion-button:not(.collapsed) { background-color: var(--light-bg); color: var(--primary-blue); font-weight: 700; }
 
-        /* 圖片外框與動畫 */
+        .intro-gallery img { width: 100%; height: 250px; object-fit: cover; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); transition: 0.3s; }
+        .intro-gallery img:hover { transform: scale(1.03); }
+
+        .product-card { background: white; border-radius: 12px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); transition: 0.3s; height: 100%; }
+        .product-card:hover { transform: translateY(-10px); }
+        .product-img-box { height: 220px; overflow: hidden; }
+        .product-img-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .product-info { padding: 25px; }
+        .product-info i { font-size: 1.5rem; color: var(--accent-gold); margin-bottom: 10px; display: block; }
+
         .img-box { border-radius: 15px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
         .img-box img { width: 100%; height: auto; display: block; }
         .reveal { opacity: 0; transition: all 1s ease-out; }
-        .reveal.active { opacity: 1; transform: translateX(0) translateY(0); }
         .reveal-left { transform: translateX(-80px); }
         .reveal-right { transform: translateX(80px); }
         .reveal-bottom { transform: translateY(40px); }
+        .reveal.active { opacity: 1; transform: translateX(0) translateY(0); }
 
         .contact-section { background: #001a33; color: white; padding: 80px 0; }
-        footer { background: #000d1a; color: #888; padding: 25px 0; text-align: center; }
-        
-        @media (max-width: 768px) { .hero h1 { font-size: 2.2rem; } }
+        .contact-item { margin-bottom: 18px; font-size: 1.1rem; display: flex; align-items: flex-start; }
+        .contact-item i { color: var(--accent-gold); margin-right: 15px; font-size: 1.3rem; margin-top: 5px; }
+        .contact-item a { color: white; text-decoration: none; }
+        .map-box { border-radius: 15px; overflow: hidden; height: 350px; }
+
+        footer { background: #000d1a; color: #888; padding: 25px 0; text-align: center; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.1); }
     </style>
 </head>
 <body>
@@ -90,7 +102,7 @@
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="https://eathongene.github.io/1page-chanfar/icon.png" alt="Logo">
+                <img src="https://eathongene.github.io/1page-chanfar/icon.png" alt="強發金屬 Logo">
                 強發金屬有限公司
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -103,7 +115,7 @@
                     <li class="nav-item"><a class="nav-link" href="#products">產品項目</a></li>
                     <li class="nav-item"><a class="nav-link" href="#capability">加工能力</a></li>
                     <li class="nav-item"><a class="nav-link" href="#news">最新消息</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">聯絡我們</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">聯絡方式</a></li>
                 </ul>
             </div>
         </div>
@@ -114,22 +126,42 @@
             <h1 class="display-4 fw-bold">皮帶輪專業製造 ‧ 彰化精密 CNC 加工</h1>
             <p class="lead mt-3">強發金屬有限公司 — 逾 40 年工藝技術，成就產業穩定傳動</p>
             <a href="#contact" class="btn btn-warning btn-lg mt-4 fw-bold px-5 shadow">聯繫詢價</a>
+            <div class="mt-4">
+                <a href="https://lin.ee/cWg2pdQ">
+                    <img alt="強發金屬 LINE 詢價" src="https://i.imgur.com/hKMTTYt.png" style="height:40px; width:auto" />
+                </a>
+            </div>
         </div>
     </header>
+
+    <section class="pb-0">
+        <div class="container intro-gallery">
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4 reveal reveal-bottom">
+                    <img src="https://eathongene.github.io/1page-chanfar/01.gif" alt="專業三角皮帶輪生產展示">
+                </div>
+                <div class="col-md-4 reveal reveal-bottom" style="transition-delay: 0.1s;">
+                    <img src="https://eathongene.github.io/1page-chanfar/02.gif" alt="彰化CNC零件加工流程">
+                </div>
+                <div class="col-md-4 reveal reveal-bottom" style="transition-delay: 0.2s;">
+                    <img src="https://eathongene.github.io/1page-chanfar/03.gif" alt="精密金屬零件製造">
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section id="about">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-4 reveal reveal-left">
-                    <h2 class="fw-bold mb-4">關於強發金屬</h2>
-                    <p class="fs-5">成立於 1979 年，具備從研發、素材鑄造到高精度加工的一站式服務能力。我們堅持「品質第一、技術創新」，為國內外機械產業提供最可靠的動力傳輸零件。</p>
-                    <div class="row mt-4">
-                        <div class="col-6"><h5><i class="bi bi-check-circle-fill text-primary me-2"></i>專業 OEM/ODM</h5></div>
-                        <div class="col-6"><h5><i class="bi bi-check-circle-fill text-primary me-2"></i>精密尺寸控制</h5></div>
-                    </div>
+                    <h2 class="fw-bold mb-4">關於強發金屬 - 彰化精密加工領航者</h2>
+                    <p><strong>強發金屬有限公司</strong>成立於 1979 年，擁有超過四十年的金屬零件製造與皮帶輪生產經驗。我們具備從研發、素材鑄造到高精度加工的一站式服務能力。</p>
+                    <p>憑藉著深厚的機械加工底蘊與對品質的堅持，我們在<strong>彰化CNC加工</strong>領域深耕多年，服務於多樣產業，是您最值得信賴的長期策略夥伴。</p>
                 </div>
                 <div class="col-lg-6 reveal reveal-right">
-                    <div class="img-box"><img src="https://eathongene.github.io/1page-chanfar/fac.gif" alt="廠房外觀"></div>
+                    <div class="img-box">
+                        <img src="https://eathongene.github.io/1page-chanfar/fac.gif" alt="強發金屬彰化廠房環境">
+                    </div>
                 </div>
             </div>
         </div>
@@ -141,20 +173,38 @@
             <div class="row g-4">
                 <div class="col-md-4 reveal reveal-bottom">
                     <div class="product-card">
-                        <div class="product-img-box"><img src="https://eathongene.github.io/1page-chanfar/01.png" alt="皮帶輪"></div>
-                        <div class="product-info"><h4>專業皮帶輪</h4><p>客製化三角皮帶輪、多溝輪、平皮帶輪，支援多種規格與材質選用。</p></div>
+                        <div class="product-img-box">
+                            <img src="https://eathongene.github.io/1page-chanfar/01.png" alt="專業三角皮帶輪製造">
+                        </div>
+                        <div class="product-info">
+                            <i class="bi bi-gear-wide"></i>
+                            <h4 class="fw-bold">專業皮帶輪</h4>
+                            <p>生產三角皮帶輪、5V/8V、多溝輪、鋼索輪。支持 ODM 特規開發。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 reveal reveal-bottom" style="transition-delay: 0.1s;">
+                    <div class="product-card">
+                        <div class="product-img-box">
+                            <img src="https://eathongene.github.io/1page-chanfar/02.png" alt="精密CNC加工機件">
+                        </div>
+                        <div class="product-info">
+                            <i class="bi bi-hammer"></i>
+                            <h4 class="fw-bold">機械機件開發</h4>
+                            <p>專精空壓機零件、軸承座、食品機械組件及農業傳動零件。</p>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-4 reveal reveal-bottom" style="transition-delay: 0.2s;">
                     <div class="product-card">
-                        <div class="product-img-box"><img src="https://eathongene.github.io/1page-chanfar/02.png" alt="CNC加工"></div>
-                        <div class="product-info"><h4>CNC 精密車削</h4><p>針對中大型機械零件提供精準車削服務，確保工件垂直度與同心度。</p></div>
-                    </div>
-                </div>
-                <div class="col-md-4 reveal reveal-bottom" style="transition-delay: 0.4s;">
-                    <div class="product-card">
-                        <div class="product-img-box"><img src="https://eathongene.github.io/1page-chanfar/03.png" alt="其他零件"></div>
-                        <div class="product-info"><h4>各式傳動零件</h4><p>包含聯軸器、同步帶輪等機械關鍵零件之代工與研發製作。</p></div>
+                        <div class="product-img-box">
+                            <img src="https://eathongene.github.io/1page-chanfar/03.png" alt="客製化OEM/ODM金屬製造">
+                        </div>
+                        <div class="product-info">
+                            <i class="bi bi-vector-pen"></i>
+                            <h4 class="fw-bold">OEM / ODM 服務</h4>
+                            <p>從模具設計、素材鑄/鍛造，到成品加工與組立，提供垂直整合服務。</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -165,17 +215,18 @@
         <div class="container">
             <h2 class="section-title">技術與加工能力</h2>
             <div class="row align-items-center flex-row-reverse">
-                <div class="col-lg-6 mb-4 reveal reveal-right">
-                    <h3 class="fw-bold mb-4">精密設備與檢驗</h3>
-                    <p>我們引進現代化 CNC 車床與銑床，並配備動平衡校正設備，確保每一件出廠的皮帶輪在高速運轉下依然穩定、不跳動。</p>
+                <div class="col-lg-6 reveal reveal-right">
+                    <h3 class="fw-bold mb-4">精密設備與技術優勢</h3>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><i class="bi bi-cpu-fill text-primary me-2"></i>CNC 車銑複合加工</li>
-                        <li class="mb-2"><i class="bi bi-shield-check text-primary me-2"></i>專業動平衡校正</li>
-                        <li class="mb-2"><i class="bi bi-tools text-primary me-2"></i>專用模具開發與鑄造</li>
+                        <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i><strong>CNC 精密車銑加工：</strong> 確保尺寸公差精密且品質穩定。</li>
+                        <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i><strong>動平衡校正服務：</strong> 減少震動並延長機械壽命。</li>
+                        <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i><strong>專業焊接技術：</strong> 提供 CO2 焊接、氬焊 (TIG)。</li>
                     </ul>
                 </div>
                 <div class="col-lg-6 reveal reveal-left">
-                    <div class="img-box"><img src="https://eathongene.github.io/1page-chanfar/cnc.jpg" alt="設備照片"></div>
+                    <div class="img-box">
+                        <img src="https://eathongene.github.io/1page-chanfar/cnc.jpg" alt="彰化CNC精密加工設備">
+                    </div>
                 </div>
             </div>
         </div>
@@ -199,17 +250,18 @@
 
     <section id="contact" class="contact-section">
         <div class="container">
+            <h2 class="text-white text-center mb-5 fw-bold">聯繫強發金屬</h2>
             <div class="row g-5">
                 <div class="col-lg-5 reveal reveal-left">
-                    <h2 class="text-white fw-bold mb-4">聯繫強發金屬</h2>
-                    <p class="mb-4 text-white-50">如有任何皮帶輪需求或 CNC 加工詢價，歡迎來電或親臨廠務洽談。</p>
-                    <p><i class="bi bi-geo-alt-fill me-3 text-warning"></i>彰化縣福興鄉南興街 93-36 號</p>
-                    <p><i class="bi bi-telephone-fill me-3 text-warning"></i>(04) 770-1699</p>
-                    <p><i class="bi bi-printer-fill me-3 text-warning"></i>(04) 770-1689</p>
+                    <h4 class="mb-4 text-white">強發金屬有限公司</h4>
+                    <div class="contact-item"><i class="bi bi-geo-alt-fill"></i><span>506 台灣彰化縣福興鄉三和村南興街 93-36 號</span></div>
+                    <div class="contact-item"><i class="bi bi-telephone-fill"></i><span>電話：<a href="tel:047701699">(04) 770-1699</a></span></div>
+                    <div class="contact-item"><i class="bi bi-envelope-fill"></i><span>Email：<a href="mailto:sales@chan-far.com">sales@chan-far.com</a></span></div>
+                    <div class="mt-4"><a href="mailto:sales@chan-far.com" class="btn btn-warning fw-bold px-4 py-2 shadow">立即詢價</a></div>
                 </div>
                 <div class="col-lg-7 reveal reveal-right">
-                    <div class="img-box" style="height: 350px;">
-                        <iframe width="100%" height="100%" frameborder="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3644.24647932626!2d120.4439127!3d24.022359!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693952f1437637%3A0xf657e2c90a169b8c!2zNTA25b2w5YyW57ij56aP6IiI6YSJ5Y2X6IiI6KGXOTMtMzbomZ8!5e0!3m2!1szh-TW!2stw!4v1700000000000"></iframe>
+                    <div class="map-box shadow">
+                        <iframe width="100%" height="100%" frameborder="0" scrolling="no" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3646.6190740924975!2d120.4431718!3d23.9739433!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346949f57d422329%3A0xc3f8e58f273574d7!2zNTA25b2w5YyW57ij56aP6IiI6YSJ5Y2X6IiI6KGXOTMtMzbomZ8!5e0!3m2!1szh-TW!2stw!4v1716450000000!5m2!1szh-TW!2stw"></iframe>
                     </div>
                 </div>
             </div>
@@ -219,42 +271,36 @@
     <footer>
         <div class="container">
             <p class="mb-0">© <span id="current-year"></span> 強發金屬有限公司 Chan Far Metal Co., Ltd. 版權所有</p>
-            <p class="small mt-1 text-white-50">彰化CNC加工 | 皮帶輪 | 三角皮帶輪專業製造</p>
+            <p class="small mt-1">彰化CNC加工 | 皮帶輪 | 三角皮帶輪專業製造</p>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // 1. 修正自定義網域 Identity 登入問題
-        if (window.netlifyIdentity) {
-            window.localStorage.setItem("netlifySiteURL", "https://radiant-swan-9d56af.netlify.app");
-            window.netlifyIdentity.on("init", user => {
-                if (!user) {
-                    window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; });
-                }
-            });
-        }
-
         document.getElementById("current-year").textContent = new Date().getFullYear();
         
-        // 2. 捲動揭示動畫
+        // 捲動揭示動畫
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
-            reveals.forEach(el => {
+            for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
-                var elementTop = el.getBoundingClientRect().top;
-                if (elementTop < windowHeight - 120) { el.classList.add("active"); }
-            });
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 120) {
+                    reveals[i].classList.add("active");
+                }
+            }
         }
         window.addEventListener("scroll", reveal);
 
-        // 3. 非同步抓取最新消息 (相容陣列與 CMS 格式)
+        // 動態抓取最新消息 (Decap CMS / 靜態 JSON)
         async function fetchNews() {
             const accordion = document.getElementById('newsAccordion');
             try {
+                // 加入隨機參數防止快取
                 const response = await fetch(`./news.json?t=${new Date().getTime()}`);
                 const rawData = await response.json();
                 
+                // 相容 Decap CMS 的物件格式與純陣列格式
                 const newsData = Array.isArray(rawData) ? rawData : (rawData.news || []);
                 
                 document.getElementById('news-loading').style.display = 'none';
@@ -286,18 +332,22 @@
             }
         }
 
-        // 手機版導覽列自動關閉
+        // 手機版導覽列點擊自動關閉
         const navLinks = document.querySelectorAll('.nav-link');
         const menuToggle = document.getElementById('navbarNav');
+        const bsCollapse = new bootstrap.Collapse(menuToggle, {toggle:false});
         navLinks.forEach((l) => {
             l.addEventListener('click', () => { 
                 if(window.innerWidth < 992 && menuToggle.classList.contains('show')) { 
-                    new bootstrap.Collapse(menuToggle).hide();
-                }
+                    bsCollapse.hide(); 
+                } 
             });
         });
 
-        window.onload = () => { reveal(); fetchNews(); };
+        window.onload = () => {
+            reveal();
+            fetchNews();
+        };
     </script>
 </body>
 </html>
