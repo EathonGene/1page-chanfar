@@ -1,20 +1,28 @@
 backend:
   name: git-gateway
-  branch: main # 確保這是您 GitHub 的主要分支名稱
+  branch: main # 或是您的分支名稱 master
 
-media_folder: "images" 
+media_folder: "images"
 public_folder: "/images"
 
 collections:
   - name: "news"
     label: "最新消息"
-    folder: "/" # 資料存放在根目錄
+    folder: "/"
     extension: "json"
     format: "json"
-    identifier_field: "title"
-    slug: "news"
     create: true
-    fields:
-      - { label: "標題", name: "title", widget: "string" }
-      - { label: "日期", name: "date", widget: "datetime", format: "YYYY-MM-DD", dateFormat: "YYYY-MM-DD", timeFormat: false }
-      - { label: "內容", name: "content", widget: "markdown" }
+    slug: "news"
+    # 這裡確保它會寫入根目錄的 news.json
+    files:
+      - label: "最新消息清單"
+        name: "news_list"
+        file: "news.json"
+        fields:
+          - label: "消息清單"
+            name: "news"
+            widget: "list"
+            fields:
+              - { label: "日期", name: "date", widget: "datetime", format: "YYYY-MM-DD", timeFormat: false }
+              - { label: "標題", name: "title", widget: "string" }
+              - { label: "內容", name: "content", widget: "markdown" }
