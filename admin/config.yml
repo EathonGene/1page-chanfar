@@ -2,5 +2,6 @@ backend:
   name: github
   repo: eathongene/1page-chanfar
   branch: main
-  base_url: https://1page-chanfar.fs80067.workers.dev # 這是您在 Cloudflare 建立的認證站網址
-  auth_endpoint: /auth
+  # 關鍵新增：指向你剛剛建立的 Worker 網址
+  base_url: https://cms-auth.fs80067.workers.dev
+  auth_endpoint: auth
