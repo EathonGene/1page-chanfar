@@ -1,25 +1,20 @@
 backend:
   name: git-gateway
-  branch: main # 或是您的分支名稱 master
+  branch: main
 
 media_folder: "images"
 public_folder: "/images"
 
 collections:
-  - name: "news"
-    label: "最新消息"
-    folder: "/"
-    extension: "json"
-    format: "json"
-    create: true
-    slug: "news"
-    # 這裡確保它會寫入根目錄的 news.json
+  - name: "content"
+    label: "網站內容"
+    delete: false
     files:
       - label: "最新消息清單"
         name: "news_list"
         file: "news.json"
         fields:
-          - label: "消息清單"
+          - label: "最新消息"
             name: "news"
             widget: "list"
             fields:
