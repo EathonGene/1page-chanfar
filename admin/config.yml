@@ -1,7 +1,32 @@
+# 1. 後端連線設定
 backend:
   name: github
   repo: EathonGene/1page-chanfar
   branch: main
-  # 這裡只要填到 .dev 結尾，不要加 /auth
   base_url: https://cms-auth.fs80067.workers.dev
   auth_endpoint: auth
+
+# 2. 媒體檔案路徑 (解決 property 'media_folder' 錯誤)
+# 確保 images 資料夾存在於您的 GitHub 根目錄
+media_folder: "images"
+public_folder: "/images"
+
+# 3. 內容集合設定 (解決 property 'collections' 錯誤)
+collections:
+  - name: "news_data"
+    label: "最新消息管理"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - label: "最新消息內容"
+        name: "news_file"
+        file: "news.json"
+        fields:
+          - label: "消息清單"
+            name: "news"
+            widget: "list"
+            fields:
+              - { label: "日期", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+              - { label: "標題", name: "title", widget: "string" }
+              - { label: "內容", name: "content", widget: "markdown" }
