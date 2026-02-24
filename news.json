@@ -1,5 +1,7 @@
-{
-  "title": "test",
-  "date": "2026-02-24",
-  "content": "tsett"
-}
+[
+  {
+    "date": "2024-05-22",
+    "title": "測試消息",
+    "content": "這是透過 GitHub 自動擷取的摺疊內容測試。"
+  }
+]
