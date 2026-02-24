@@ -1,6 +1,11 @@
 backend:
   name: git-gateway
   branch: main
+  # 新增下面這一行，非常重要
+  site_domain: radiant-swan-9d56af.netlify.app
+
+# 告訴 CMS 你的官方網址
+site_url: https://1page.chan-far.com
 
 media_folder: "images"
 public_folder: "/images"
