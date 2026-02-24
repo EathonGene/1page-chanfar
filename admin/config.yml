@@ -1,7 +1,5 @@
 backend:
   name: github
-  repo: eathongene/1page-chanfar # 您的路徑
+  repo: eathongene/1page-chanfar
   branch: main
-
-# 如果您是透過 Cloudflare 登入，不需要額外的 Identity 配置
-# 但您需要在 GitHub 上建立一個 OAuth App 取得 Token (稍後說明)
+  # 這裡移除 git-gateway 或 netlify 相關設定
