@@ -1,27 +1,6 @@
-# 1. 後端設定：改用 GitHub 直連模式
 backend:
   name: github
-  repo: eathongene/1page-chanfar  # 您的 GitHub 帳號/儲存庫名稱
+  repo: eathongene/1page-chanfar
   branch: main
-
-# 2. 媒體檔案設定 (解決 config must have required property 'media_folder' 錯誤)
-media_folder: "images"          # 上傳圖片後存放的資料夾路徑
-public_folder: "/images"        # 網頁讀取圖片時使用的路徑
-
-# 3. 內容集合設定 (解決 config must have required property 'collections' 錯誤)
-collections:
-  - name: "content"
-    label: "網站內容"
-    delete: false
-    files:
-      - label: "最新消息清單"
-        name: "news_list"
-        file: "news.json"
-        fields:
-          - label: "最新消息"
-            name: "news"
-            widget: "list"
-            fields:
-              - { label: "日期", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
-              - { label: "標題", name: "title", widget: "string" }
-              - { label: "內容", name: "content", widget: "markdown" }
+  base_url: https://1page-chanfar.fs80067.workers.dev # 這是您在 Cloudflare 建立的認證站網址
+  auth_endpoint: /auth
