@@ -4,7 +4,7 @@ backend:
   repo: eathongene/1page-chanfar
   branch: main
   # 請替換成您上一腳步部署的 Worker 網址
-  base_url: https://cms-auth.你的名稱.workers.dev
+  base_url: https://cms-auth.fs80067.workers.dev
   auth_endpoint: auth
 
 # 2. 媒體檔案路徑 (解決 property 'media_folder' 錯誤)
