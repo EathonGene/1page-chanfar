@@ -7,22 +7,18 @@
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
-    // 在 CMS 載入後，手動強制注入 API 網址
-    var netlifySiteURL = "https://radiant-swan-9d56af.netlify.app";
-    window.localStorage.setItem("netlifySiteURL", netlifySiteURL);
+    const NETLIFY_URL = "https://radiant-swan-9d56af.netlify.app";
+    window.localStorage.setItem("netlifySiteURL", NETLIFY_URL);
+  </script>
 
-    // 攔截並修正 Identity 視窗行為
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
-    }
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+  <script>
+    // 登入成功後的回調
+    window.netlifyIdentity.on("login", () => {
+      document.location.href = "/admin/";
+    });
   </script>
 </body>
 </html>
