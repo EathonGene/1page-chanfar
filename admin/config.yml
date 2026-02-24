@@ -1,0 +1,20 @@
+backend:
+  name: git-gateway
+  branch: main # 確保這是您 GitHub 的主要分支名稱
+
+media_folder: "images" 
+public_folder: "/images"
+
+collections:
+  - name: "news"
+    label: "最新消息"
+    folder: "/" # 資料存放在根目錄
+    extension: "json"
+    format: "json"
+    identifier_field: "title"
+    slug: "news"
+    create: true
+    fields:
+      - { label: "標題", name: "title", widget: "string" }
+      - { label: "日期", name: "date", widget: "datetime", format: "YYYY-MM-DD", dateFormat: "YYYY-MM-DD", timeFormat: false }
+      - { label: "內容", name: "content", widget: "markdown" }
