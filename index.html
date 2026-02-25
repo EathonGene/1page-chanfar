@@ -113,6 +113,22 @@
         .news-date { color: var(--accent-gold); font-weight: 500; font-size: 0.9rem; }
         .news-title { font-weight: 700; color: var(--primary-blue); margin: 10px 0; }
 
+        /* --- 查看更多按鈕樣式 --- */
+        .btn-more {
+            background-color: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+            font-weight: 700;
+            padding: 10px 35px;
+            border-radius: 50px;
+            transition: 0.3s;
+            margin-top: 30px;
+        }
+        .btn-more:hover {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+
         /* --- 產品與圖片 --- */
         .intro-gallery img {
             width: 100%; height: 250px; object-fit: cover; border-radius: 12px;
@@ -291,12 +307,24 @@
     <section id="news" style="background-color: #fff;">
         <div class="container">
             <h2 class="section-title">最新消息</h2>
+            
             <div id="news-container" class="row g-4 justify-content-center">
                 <div class="col-12 text-center py-5">
                     <div class="spinner-border text-primary" role="status">
                         <span class="visually-hidden">載入中...</span>
                     </div>
                 </div>
+            </div>
+
+            <div class="collapse" id="moreNewsCollapse">
+                <div id="extra-news-container" class="row g-4 justify-content-center mt-2">
+                    </div>
+            </div>
+
+            <div id="news-btn-wrapper" class="text-center mt-4 d-none">
+                <button class="btn btn-more" type="button" data-bs-toggle="collapse" data-bs-target="#moreNewsCollapse" aria-expanded="false" id="toggleNewsBtn">
+                    查看更多消息
+                </button>
             </div>
         </div>
     </section>
@@ -314,7 +342,7 @@
                 </div>
                 <div class="col-lg-7 reveal reveal-right">
                     <div class="map-box shadow">
-                        <iframe width="100%" height="100%" frameborder="0" scrolling="no" src="https://maps.google.com/maps?q=彰化縣福興鄉三和村南興街93-36號&hl=zh-TW&z=16&output=embed"></iframe>
+                        <iframe width="100%" height="100%" frameborder="0" scrolling="no" src="https://maps.google.com/maps?q=彰化縣福興鄉三和村南興街93-36號&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
                     </div>
                 </div>
             </div>
@@ -336,13 +364,17 @@
         // --- 動態載入新聞功能 ---
         async function fetchNews() {
             const container = document.getElementById('news-container');
+            const extraContainer = document.getElementById('extra-news-container');
+            const btnWrapper = document.getElementById('news-btn-wrapper');
+            const toggleBtn = document.getElementById('toggleNewsBtn');
+
             try {
-                // 當您設定好 Cloudflare Pages Functions 後，API 路徑通常如下
                 const response = await fetch('/api/news');
                 if (!response.ok) throw new Error('無法取得資料');
                 
                 const data = await response.json();
                 container.innerHTML = ''; // 清除 loading 狀態
+                extraContainer.innerHTML = '';
 
                 if (data.length === 0) {
                     container.innerHTML = '<p class="text-center">目前尚無最新消息</p>';
@@ -351,7 +383,7 @@
 
                 data.forEach((item, index) => {
                     const newsHtml = `
-                        <div class="col-md-4 reveal reveal-bottom" style="transition-delay: ${index * 0.1}s;">
+                        <div class="col-md-4 reveal reveal-bottom" style="transition-delay: ${(index % 3) * 0.1}s;">
                             <div class="card news-card p-4">
                                 <div class="news-date"><i class="bi bi-calendar3 me-2"></i>${item.date}</div>
                                 <h5 class="news-title">${item.title}</h5>
@@ -359,10 +391,30 @@
                             </div>
                         </div>
                     `;
-                    container.innerHTML += newsHtml;
+
+                    // 前三則放入主容器，其餘放入摺疊容器
+                    if (index < 3) {
+                        container.innerHTML += newsHtml;
+                    } else {
+                        extraContainer.innerHTML += newsHtml;
+                    }
                 });
+
+                // 如果新聞超過三則，顯示按鈕
+                if (data.length > 3) {
+                    btnWrapper.classList.remove('d-none');
+                }
                 
-                // 重新觸發 reveal 檢測，確保新加入的元素能顯示
+                // 監聽摺疊狀態改變按鈕文字
+                const collapseEl = document.getElementById('moreNewsCollapse');
+                collapseEl.addEventListener('show.bs.collapse', () => {
+                    toggleBtn.textContent = '收合消息';
+                });
+                collapseEl.addEventListener('hide.bs.collapse', () => {
+                    toggleBtn.textContent = '查看更多消息';
+                });
+
+                // 重新觸發 reveal 檢測
                 setTimeout(reveal, 100);
 
             } catch (e) {
@@ -388,7 +440,7 @@
         // 頁面載入完成後的動作
         window.onload = () => {
             reveal();
-            fetchNews(); // 同步抓取新聞
+            fetchNews(); 
         };
 
         // 行動版選單自動關閉
