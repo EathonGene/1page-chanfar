@@ -43,37 +43,18 @@
         }
 
         .navbar > .container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: nowrap;
+            display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap;
         }
 
         .navbar-brand { 
-            font-weight: 700; 
-            color: var(--primary-blue) !important; 
-            font-size: 1.2rem;
-            display: flex; 
-            align-items: center; 
-            margin-right: 0;
-            max-width: 75%;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            font-weight: 700; color: var(--primary-blue) !important; font-size: 1.2rem;
+            display: flex; align-items: center; margin-right: 0; max-width: 75%;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
 
-        .navbar-brand img { 
-            height: 35px; 
-            margin-right: 8px; 
-            border-radius: 4px; 
-            flex-shrink: 0;
-        }
+        .navbar-brand img { height: 35px; margin-right: 8px; border-radius: 4px; flex-shrink: 0; }
 
-        .navbar-toggler {
-            flex-shrink: 0;
-            padding: 4px 8px;
-            margin-left: 5px;
-        }
+        .navbar-toggler { flex-shrink: 0; padding: 4px 8px; margin-left: 5px; }
 
         .nav-link { color: #333 !important; font-weight: 500; margin: 0 10px; transition: 0.3s; }
         .nav-link:hover { color: var(--primary-blue) !important; }
@@ -102,34 +83,22 @@
 
         /* --- 最新消息卡片 --- */
         .news-card {
-            background: #fff;
-            border: none;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: 0.3s;
-            height: 100%;
+            background: #fff; border: none; border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; height: 100%;
+            overflow: hidden; /* 確保圖片不超出圓角 */
         }
         .news-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
         .news-date { color: var(--accent-gold); font-weight: 500; font-size: 0.9rem; }
         .news-title { font-weight: 700; color: var(--primary-blue); margin: 10px 0; }
 
-        /* --- 查看更多按鈕樣式 --- */
+        /* --- 摺疊按鈕 --- */
         .btn-more {
-            background-color: transparent;
-            color: var(--primary-blue);
-            border: 2px solid var(--primary-blue);
-            font-weight: 700;
-            padding: 10px 35px;
-            border-radius: 50px;
-            transition: 0.3s;
-            margin-top: 30px;
+            background-color: transparent; color: var(--primary-blue); border: 2px solid var(--primary-blue);
+            font-weight: 700; padding: 10px 35px; border-radius: 50px; transition: 0.3s; margin-top: 30px;
         }
-        .btn-more:hover {
-            background-color: var(--primary-blue);
-            color: white;
-        }
+        .btn-more:hover { background-color: var(--primary-blue); color: white; }
 
-        /* --- 產品與圖片 --- */
+        /* --- 圖片與其他 --- */
         .intro-gallery img {
             width: 100%; height: 250px; object-fit: cover; border-radius: 12px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.1); transition: 0.3s;
@@ -206,104 +175,6 @@
         </div>
     </header>
 
-    <section class="pb-0">
-        <div class="container intro-gallery">
-            <div class="row g-4 justify-content-center">
-                <div class="col-md-4 reveal reveal-bottom">
-                    <img src="https://eathongene.github.io/1page-chanfar/01.gif" alt="專業三角皮帶輪生產展示">
-                </div>
-                <div class="col-md-4 reveal reveal-bottom" style="transition-delay: 0.1s;">
-                    <img src="https://eathongene.github.io/1page-chanfar/02.gif" alt="彰化CNC零件加工流程">
-                </div>
-                <div class="col-md-4 reveal reveal-bottom" style="transition-delay: 0.2s;">
-                    <img src="https://eathongene.github.io/1page-chanfar/03.gif" alt="精密金屬零件製造">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="about">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-4 reveal reveal-left">
-                    <h2 class="fw-bold mb-4">關於強發金屬 - 彰化精密加工領航者</h2>
-                    <p><strong>強發金屬有限公司</strong>成立於 1979 年，擁有超過四十年的金屬零件製造與皮帶輪生產經驗。我們具備從研發、素材鑄造到高精度加工的一站式服務能力。</p>
-                    <p>憑藉著深厚的機械加工底蘊與對品質的堅持，我們在<strong>彰化CNC加工</strong>領域深耕多年，服務於多樣產業，是您最值得信賴的長期策略夥伴。</p>
-                </div>
-                <div class="col-lg-6 reveal reveal-right">
-                    <div class="img-box">
-                        <img src="https://eathongene.github.io/1page-chanfar/fac.gif" alt="強發金屬彰化廠房環境">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="products" style="background-color: var(--light-bg);">
-        <div class="container">
-            <h2 class="section-title">核心產品系列</h2>
-            <div class="row g-4">
-                <div class="col-md-4 reveal reveal-bottom">
-                    <div class="product-card">
-                        <div class="product-img-box">
-                            <img src="https://eathongene.github.io/1page-chanfar/01.png" alt="專業三角皮帶輪製造">
-                        </div>
-                        <div class="product-info">
-                            <i class="bi bi-gear-wide"></i>
-                            <h4 class="fw-bold">專業皮帶輪</h4>
-                            <p>生產三角皮帶輪、5V/8V、多溝輪、鋼索輪。支持 ODM 特規開發。</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 reveal reveal-bottom" style="transition-delay: 0.1s;">
-                    <div class="product-card">
-                        <div class="product-img-box">
-                            <img src="https://eathongene.github.io/1page-chanfar/02.png" alt="精密CNC加工機件">
-                        </div>
-                        <div class="product-info">
-                            <i class="bi bi-hammer"></i>
-                            <h4 class="fw-bold">機械機件開發</h4>
-                            <p>專精空壓機零件、軸承座、食品機械組件及農業傳動零件。</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 reveal reveal-bottom" style="transition-delay: 0.2s;">
-                    <div class="product-card">
-                        <div class="product-img-box">
-                            <img src="https://eathongene.github.io/1page-chanfar/03.png" alt="客製化OEM/ODM金屬製造">
-                        </div>
-                        <div class="product-info">
-                            <i class="bi bi-vector-pen"></i>
-                            <h4 class="fw-bold">OEM / ODM 服務</h4>
-                            <p>從模具設計、素材鑄/鍛造，到成品加工與組立，提供垂直整合服務。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="capability">
-        <div class="container">
-            <h2 class="section-title">技術與加工能力</h2>
-            <div class="row align-items-center flex-row-reverse">
-                <div class="col-lg-6 reveal reveal-right">
-                    <h3 class="fw-bold mb-4">精密設備與技術優勢</h3>
-                    <ul class="list-unstyled">
-                        <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i><strong>CNC 精密車銑加工：</strong> 確保尺寸公差精密且品質穩定。</li>
-                        <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i><strong>動平衡校正服務：</strong> 減少震動並延長機械壽命。</li>
-                        <li class="mb-3"><i class="bi bi-check-circle-fill text-primary me-2"></i><strong>專業焊接技術：</strong> 提供 CO2 焊接、氬焊 (TIG)。</li>
-                    </ul>
-                </div>
-                <div class="col-lg-6 reveal reveal-left">
-                    <div class="img-box">
-                        <img src="https://eathongene.github.io/1page-chanfar/cnc.jpg" alt="彰化CNC精密加工設備">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section id="news" style="background-color: #fff;">
         <div class="container">
             <h2 class="section-title">最新消息</h2>
@@ -317,34 +188,13 @@
             </div>
 
             <div class="collapse" id="moreNewsCollapse">
-                <div id="extra-news-container" class="row g-4 justify-content-center mt-2">
-                    </div>
+                <div id="extra-news-container" class="row g-4 justify-content-center mt-2"></div>
             </div>
 
             <div id="news-btn-wrapper" class="text-center mt-4 d-none">
                 <button class="btn btn-more" type="button" data-bs-toggle="collapse" data-bs-target="#moreNewsCollapse" aria-expanded="false" id="toggleNewsBtn">
                     查看更多消息
                 </button>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <h2 class="text-white text-center mb-5 fw-bold">聯繫強發金屬</h2>
-            <div class="row g-5">
-                <div class="col-lg-5 reveal reveal-left">
-                    <h4 class="mb-4 text-white">強發金屬有限公司</h4>
-                    <div class="contact-item"><i class="bi bi-geo-alt-fill"></i><span>506 台灣彰化縣福興鄉三和村南興街 93-36 號</span></div>
-                    <div class="contact-item"><i class="bi bi-telephone-fill"></i><span>電話：<a href="tel:047701699">(04) 770-1699</a></span></div>
-                    <div class="contact-item"><i class="bi bi-envelope-fill"></i><span>Email：<a href="mailto:sales@chan-far.com">sales@chan-far.com</a></span></div>
-                    <div class="mt-4"><a href="mailto:sales@chan-far.com" class="btn btn-warning fw-bold px-4 py-2 shadow">立即詢價</a></div>
-                </div>
-                <div class="col-lg-7 reveal reveal-right">
-                    <div class="map-box shadow">
-                        <iframe width="100%" height="100%" frameborder="0" scrolling="no" src="https://maps.google.com/maps?q=彰化縣福興鄉三和村南興街93-36號&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -358,10 +208,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // 設定年份
         document.getElementById("current-year").textContent = new Date().getFullYear();
         
-        // --- 動態載入新聞功能 ---
         async function fetchNews() {
             const container = document.getElementById('news-container');
             const extraContainer = document.getElementById('extra-news-container');
@@ -373,7 +221,7 @@
                 if (!response.ok) throw new Error('無法取得資料');
                 
                 const data = await response.json();
-                container.innerHTML = ''; // 清除 loading 狀態
+                container.innerHTML = '';
                 extraContainer.innerHTML = '';
 
                 if (data.length === 0) {
@@ -382,17 +230,24 @@
                 }
 
                 data.forEach((item, index) => {
+                    // 圖片顯示邏輯：如果有網址則顯示 img 標籤
+                    const imgHtml = item.image_url 
+                        ? `<img src="${item.image_url}" class="card-img-top" style="height: 200px; object-fit: cover;" alt="news image">` 
+                        : '';
+
                     const newsHtml = `
                         <div class="col-md-4 reveal reveal-bottom" style="transition-delay: ${(index % 3) * 0.1}s;">
-                            <div class="card news-card p-4">
-                                <div class="news-date"><i class="bi bi-calendar3 me-2"></i>${item.date}</div>
-                                <h5 class="news-title">${item.title}</h5>
-                                <p class="card-text text-muted">${item.content.substring(0, 50)}${item.content.length > 50 ? '...' : ''}</p>
+                            <div class="card news-card">
+                                ${imgHtml}
+                                <div class="card-body p-4">
+                                    <div class="news-date"><i class="bi bi-calendar3 me-2"></i>${item.date}</div>
+                                    <h5 class="news-title">${item.title}</h5>
+                                    <p class="card-text text-muted">${item.content.substring(0, 60)}${item.content.length > 60 ? '...' : ''}</p>
+                                </div>
                             </div>
                         </div>
                     `;
 
-                    // 前三則放入主容器，其餘放入摺疊容器
                     if (index < 3) {
                         container.innerHTML += newsHtml;
                     } else {
@@ -400,58 +255,47 @@
                     }
                 });
 
-                // 如果新聞超過三則，顯示按鈕
                 if (data.length > 3) {
                     btnWrapper.classList.remove('d-none');
                 }
                 
-                // 監聽摺疊狀態改變按鈕文字
+                // 監聽摺疊事件更換按鈕文字
                 const collapseEl = document.getElementById('moreNewsCollapse');
-                collapseEl.addEventListener('show.bs.collapse', () => {
-                    toggleBtn.textContent = '收合消息';
-                });
-                collapseEl.addEventListener('hide.bs.collapse', () => {
-                    toggleBtn.textContent = '查看更多消息';
-                });
+                collapseEl.addEventListener('show.bs.collapse', () => toggleBtn.textContent = '收合消息');
+                collapseEl.addEventListener('hide.bs.collapse', () => toggleBtn.textContent = '查看更多消息');
 
-                // 重新觸發 reveal 檢測
-                setTimeout(reveal, 100);
+                setTimeout(reveal, 150);
 
             } catch (e) {
                 console.error("新聞加載失敗:", e);
-                container.innerHTML = '<p class="text-center text-muted">暫時無法載入最新消息，請稍後再試</p>';
+                container.innerHTML = '<p class="text-center text-muted">暫時無法載入最新消息</p>';
             }
         }
 
-        // 滾動動畫檢測
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) {
+                if (elementTop < windowHeight - 50) {
                     reveals[i].classList.add("active");
                 }
             }
         }
 
         window.addEventListener("scroll", reveal);
-        
-        // 頁面載入完成後的動作
         window.onload = () => {
+            fetchNews();
             reveal();
-            fetchNews(); 
         };
 
-        // 行動版選單自動關閉
+        // 行動版導覽自動關閉
         const navLinks = document.querySelectorAll('.nav-link');
         const menuToggle = document.getElementById('navbarNav');
         const bsCollapse = new bootstrap.Collapse(menuToggle, {toggle:false});
         navLinks.forEach((l) => {
             l.addEventListener('click', () => { 
-                if(window.innerWidth < 992 && menuToggle.classList.contains('show')) { 
-                    bsCollapse.hide(); 
-                } 
+                if(window.innerWidth < 992 && menuToggle.classList.contains('show')) { bsCollapse.hide(); } 
             });
         });
     </script>
