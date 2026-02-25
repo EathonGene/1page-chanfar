@@ -1,12 +1,20 @@
-// functions/api/news.js
-export async function onRequestGet(context) {
-    const { results } = await context.env.DB.prepare("SELECT * FROM news ORDER BY id DESC LIMIT 6").all();
-    return new Response(JSON.stringify(results), { headers: { "Content-Type": "application/json" } });
-}
-
+// 在 POST 處理函式內加入這段：
 export async function onRequestPost(context) {
-    const { title, content, date } = await context.request.json();
-    await context.env.DB.prepare("INSERT INTO news (title, content, date) VALUES (?, ?, ?)")
-        .bind(title, content, date).run();
-    return new Response("OK", { status: 200 });
+    const { request, env } = context;
+    const url = new URL(request.url);
+
+    // 【核心邏輯】檢查網域，如果不是您的官方網域，直接拒絕
+    // 這樣即便別人找到 pages.dev 的網址也沒用
+    if (url.hostname !== '1page.chan-far.com') {
+        return new Response('拒絕存取：請由官方網域進入', { status: 403 });
+    }
+
+    // 原本的程式碼... (取得 payload, 寫入資料庫等)
+    try {
+        const payload = await request.json();
+        // ... (執行資料庫寫入)
+        return new Response('發布成功', { status: 200 });
+    } catch (e) {
+        return new Response('發布失敗', { status: 500 });
+    }
 }
