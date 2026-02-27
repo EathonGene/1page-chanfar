@@ -29,6 +29,16 @@
         document.getElementById('newsForm').onsubmit = async (e) => {
             e.preventDefault();
 
+            let adminToken = sessionStorage.getItem('ADMIN_TOKEN');
+            if (!adminToken) {
+                adminToken = prompt('請輸入管理員 Token（只會暫存於本瀏覽器）');
+                if (adminToken) sessionStorage.setItem('ADMIN_TOKEN', adminToken);
+            }
+            if (!adminToken) {
+                alert('未輸入 Token，已取消發布');
+                return;
+            }
+
             const formData = new FormData();
             formData.append('title', document.getElementById('title').value);
             formData.append('content', document.getElementById('content').value);
@@ -41,6 +51,9 @@
 
             const res = await fetch('https://chanfar-news-api.fs80067.workers.dev/api/news', {
                 method: 'POST',
+                headers: {
+                    'X-Admin-Token': adminToken
+                },
                 body: formData
             });
 
