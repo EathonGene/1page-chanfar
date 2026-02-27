@@ -17,6 +17,10 @@
                 <label class="form-label">內容</label>
                 <textarea id="content" class="form-control" rows="5" required></textarea>
             </div>
+            <div class="mb-3">
+                <label class="form-label">圖片上傳（選填）</label>
+                <input type="file" id="image" class="form-control" accept="image/*">
+            </div>
             <button type="submit" class="btn btn-primary">發布消息</button>
         </form>
     </div>
@@ -24,15 +28,20 @@
     <script>
         document.getElementById('newsForm').onsubmit = async (e) => {
             e.preventDefault();
-            const payload = {
-                title: document.getElementById('title').value,
-                content: document.getElementById('content').value,
-                date: new Date().toLocaleDateString('zh-TW')
-            };
 
-            const res = await fetch('/api/news', {
+            const formData = new FormData();
+            formData.append('title', document.getElementById('title').value);
+            formData.append('content', document.getElementById('content').value);
+            formData.append('date', new Date().toLocaleDateString('zh-TW'));
+
+            const imageInput = document.getElementById('image');
+            if (imageInput.files && imageInput.files[0]) {
+                formData.append('image', imageInput.files[0]);
+            }
+
+            const res = await fetch('https://chanfar-news-api.fs80067.workers.dev/api/news', {
                 method: 'POST',
-                body: JSON.stringify(payload)
+                body: formData
             });
 
             if (res.ok) {

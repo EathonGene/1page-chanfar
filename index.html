@@ -369,7 +369,7 @@
             const toggleBtn = document.getElementById('toggleNewsBtn');
 
             try {
-                const response = await fetch('/api/news');
+                const response = await fetch('https://chanfar-news-api.fs80067.workers.dev/api/news');
                 if (!response.ok) throw new Error('無法取得資料');
                 
                 const data = await response.json();
@@ -382,11 +382,13 @@
                 }
 
                 data.forEach((item, index) => {
+                    const hasImage = item.imageUrl && item.imageUrl.trim() !== '';
                     const newsHtml = `
                         <div class="col-md-4 reveal reveal-bottom" style="transition-delay: ${(index % 3) * 0.1}s;">
                             <div class="card news-card p-4">
                                 <div class="news-date"><i class="bi bi-calendar3 me-2"></i>${item.date}</div>
                                 <h5 class="news-title">${item.title}</h5>
+                                ${hasImage ? `<div class="mb-3"><img src="${item.imageUrl}" alt="${item.title}" class="img-fluid rounded"></div>` : ''}
                                 <p class="card-text text-muted">${item.content.substring(0, 50)}${item.content.length > 50 ? '...' : ''}</p>
                             </div>
                         </div>
