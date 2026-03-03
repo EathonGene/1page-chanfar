@@ -129,6 +129,42 @@
             color: white;
         }
 
+        /* --- 繼續閱讀按鈕樣式 --- */
+        .btn-continue {
+            background-color: transparent;
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+            font-weight: 500;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .btn-continue:hover {
+            background-color: var(--accent-gold);
+            color: white;
+        }
+        .news-content {
+            position: relative;
+            max-height: 3.6em;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .news-content.expanded {
+            max-height: none;
+        }
+        .news-content.collapsed::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 1.2em;
+            background: linear-gradient(transparent, white);
+        }
+
         /* --- 產品與圖片 --- */
         .intro-gallery img {
             width: 100%; height: 250px; object-fit: cover; border-radius: 12px;
@@ -361,6 +397,36 @@
         // 設定年份
         document.getElementById("current-year").textContent = new Date().getFullYear();
         
+        // --- 繼續閱讀功能 ---
+        function toggleNewsContent(newsId, fullLength, contentLimit) {
+            const contentDiv = document.getElementById(`${newsId}-content`);
+            const btnText = document.getElementById(`${newsId}-btn-text`);
+            const isExpanded = contentDiv.classList.contains('expanded');
+            
+            if (isExpanded) {
+                // 收合內容
+                contentDiv.classList.remove('expanded');
+                contentDiv.classList.add('collapsed');
+                btnText.textContent = '繼續閱讀';
+                
+                // 恢復截斷的內容
+                const fullContent = contentDiv.querySelector('p').textContent;
+                contentDiv.querySelector('p').textContent = fullContent.substring(0, contentLimit);
+            } else {
+                // 展開內容
+                contentDiv.classList.remove('collapsed');
+                contentDiv.classList.add('expanded');
+                btnText.textContent = '收合內容';
+                
+                // 獲取完整內容
+                const newsIndex = newsId.split('-')[1];
+                const newsData = window.newsData ? window.newsData[newsIndex] : null;
+                if (newsData) {
+                    contentDiv.querySelector('p').textContent = newsData.content;
+                }
+            }
+        }
+
         // --- 動態載入新聞功能 ---
         async function fetchNews() {
             const container = document.getElementById('news-container');
@@ -373,6 +439,9 @@
                 if (!response.ok) throw new Error('無法取得資料');
                 
                 const data = await response.json();
+                // 將新聞資料存儲到全域變數供 toggle 函數使用
+                window.newsData = data;
+                
                 container.innerHTML = ''; // 清除 loading 狀態
                 extraContainer.innerHTML = '';
 
@@ -383,13 +452,24 @@
 
                 data.forEach((item, index) => {
                     const hasImage = item.imageUrl && item.imageUrl.trim() !== '';
+                    const contentLimit = 50;
+                    const needsTruncation = item.content.length > contentLimit;
+                    const newsId = `news-${index}`;
+                    
                     const newsHtml = `
                         <div class="col-md-4 reveal reveal-bottom" style="transition-delay: ${(index % 3) * 0.1}s;">
                             <div class="card news-card p-4">
                                 <div class="news-date"><i class="bi bi-calendar3 me-2"></i>${item.date}</div>
                                 <h5 class="news-title">${item.title}</h5>
                                 ${hasImage ? `<div class="mb-3"><img src="${item.imageUrl}" alt="${item.title}" class="img-fluid rounded"></div>` : ''}
-                                <p class="card-text text-muted">${item.content.substring(0, 50)}${item.content.length > 50 ? '...' : ''}</p>
+                                <div class="news-content ${needsTruncation ? 'collapsed' : 'expanded'}" id="${newsId}-content">
+                                    <p class="card-text text-muted mb-0">${needsTruncation ? item.content.substring(0, contentLimit) : item.content}</p>
+                                </div>
+                                ${needsTruncation ? `
+                                    <button class="btn-continue" onclick="toggleNewsContent('${newsId}', ${item.content.length}, ${contentLimit})">
+                                        <span id="${newsId}-btn-text">繼續閱讀</span>
+                                    </button>
+                                ` : ''}
                             </div>
                         </div>
                     `;
