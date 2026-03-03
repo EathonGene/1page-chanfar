@@ -426,7 +426,7 @@
             const contentDiv = document.getElementById(`${newsId}-content`);
             const btnText = document.getElementById(`${newsId}-btn-text`);
             const newsCard = contentDiv.closest('.news-card');
-            const newsCol = contentDiv.closest('.col-md-4');
+            const newsCol = contentDiv.closest('[class*="col-md-"]');
             const isExpanded = contentDiv.classList.contains('expanded');
             
             if (isExpanded) {
@@ -437,7 +437,7 @@
                 btnText.textContent = '繼續閱讀';
                 
                 // 恢復 Bootstrap 欄位類別
-                if (window.innerWidth >= 768) {
+                if (window.innerWidth >= 768 && newsCol) {
                     newsCol.className = newsCol.className.replace('col-md-12', 'col-md-4');
                 }
                 
@@ -452,7 +452,7 @@
                 btnText.textContent = '收合內容';
                 
                 // 改變 Bootstrap 欄位類別為全寬度
-                if (window.innerWidth >= 768) {
+                if (window.innerWidth >= 768 && newsCol) {
                     newsCol.className = newsCol.className.replace('col-md-4', 'col-md-12');
                 }
                 
