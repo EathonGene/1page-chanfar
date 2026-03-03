@@ -165,6 +165,22 @@
             background: linear-gradient(transparent, white);
         }
 
+        /* --- 新聞卡片展開狀態樣式 --- */
+        .news-card.expanded {
+            position: relative;
+            z-index: 10;
+        }
+        .news-content.expanded {
+            line-height: 1.8;
+            padding: 5px 0;
+        }
+        @media (min-width: 768px) {
+            .news-card.expanded .news-content {
+                max-width: none;
+                width: 100%;
+            }
+        }
+
         /* --- 產品與圖片 --- */
         .intro-gallery img {
             width: 100%; height: 250px; object-fit: cover; border-radius: 12px;
@@ -401,12 +417,14 @@
         function toggleNewsContent(newsId, fullLength, contentLimit) {
             const contentDiv = document.getElementById(`${newsId}-content`);
             const btnText = document.getElementById(`${newsId}-btn-text`);
+            const newsCard = contentDiv.closest('.news-card');
             const isExpanded = contentDiv.classList.contains('expanded');
             
             if (isExpanded) {
                 // 收合內容
                 contentDiv.classList.remove('expanded');
                 contentDiv.classList.add('collapsed');
+                newsCard.classList.remove('expanded');
                 btnText.textContent = '繼續閱讀';
                 
                 // 恢復截斷的內容
@@ -416,6 +434,7 @@
                 // 展開內容
                 contentDiv.classList.remove('collapsed');
                 contentDiv.classList.add('expanded');
+                newsCard.classList.add('expanded');
                 btnText.textContent = '收合內容';
                 
                 // 獲取完整內容
